@@ -12,9 +12,9 @@ public class Main {
         //tasks.SearchTreasure();
 
         /*Fourth task*/
-        //tasks.FindMaxHeightCarInRoad();
+        tasks.FindMaxHeightCarInRoad();
 
         /*Fifth task*/
-        tasks.isDoubleNumberParity();
+        //tasks.isDoubleNumberParity();
     }
 }

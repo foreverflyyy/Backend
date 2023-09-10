@@ -1,4 +1,4 @@
-import java.util.Scanner;
+import java.util.*;
 
 public class Tasks {
 
@@ -77,33 +77,62 @@ public class Tasks {
     /*Логистический максимин
     Ваша компания занимается грузоперевозками в Швейцарских Альпах. Вам нужно доставить груз из пункта A в пункт Z
     на большом грузовике. Из A в Z ведёт несколько дорог, каждая из которых проходит через несколько туннелей известной
-    высоты. Выясните максимальную высоту, которую может иметь ваш грузовик.
-    Формат ввода
-    На первой строке вводится количество дорог. Затем для каждой дороги вводится (на отдельных строках) количество
-    туннелей и высота каждого туннеля (точнее, максимально допустимая высота грузовика) в сантиметрах.
-    Формат вывода
-    Два целых числа: номер дороги (начиная нумерацию с единицы), по которой
-    нужно проехать, чтобы высота грузовика была наибольшей, и сама эта
-    высота. */
+    высоты. Выясните максимальную высоту, которую может иметь ваш грузовик. */
     public void FindMaxHeightCarInRoad() {
+        int needRoad = 1;
+        int minHeight = 0;
 
+        Scanner in = new Scanner(System.in);
+        System.out.print("Input quantity of roads: ");
+        int numRoads = in.nextInt();
+
+        for(int i = 0; i < numRoads; i++){
+            int minHeightByTunnel = 10000;
+
+            System.out.print("Input quantity of tunnel by road №" + (i+1) + ": ");
+            int amountTunnelByRoad = in.nextInt();
+
+            System.out.println("Input height every tunnel: ");
+            for(int j = 0; j < amountTunnelByRoad; j++){
+                int heightTunnel = in.nextInt();
+
+                if(heightTunnel < minHeightByTunnel)
+                    minHeightByTunnel = heightTunnel;
+            }
+
+            if(minHeightByTunnel > minHeight) {
+                minHeight = minHeightByTunnel;
+                needRoad = i + 1;
+            }
+        }
+
+        System.out.println("Road - " + needRoad + "; Height - " + minHeight);
     }
 
     /*Дважды четное число
     Целое трехзначное число называется «дважды четным», если и сумма его цифр, и их произведение являются четными.
     Напишите класс, который принимает с клавиатуры положительное трехзначное число и проверяет, является ли оно «дважды четным».*/
-    public void isDoubleNumberParity() throws Exception {
+    public void isDoubleNumberParity() {
         Scanner in = new Scanner(System.in);
         System.out.print("Input count of numbers: ");
-        int num = in.nextInt();
+        int number = in.nextInt();
 
-        if(num < 100 || num > 999)
-            throw new Exception("Invalid number!");
+        if(number < 100 || number > 999) {
+            System.out.println("This is Invalid Number (only 100-999)");
+            return;
+        }
 
-        boolean firstCondition = false;
-        boolean secondCondition = false;
+        int sum = 0;
+        int mul = 1;
 
-        if(firstCondition && secondCondition)
+        while (number > 0) {
+            sum += number % 10;
+            mul *= number % 10;
+
+            number = number / 10;
+        }
+
+        if(sum == mul)
             System.out.println("This is Double Number Parity");
         else
             System.out.println("This is not Double Number Parity");
