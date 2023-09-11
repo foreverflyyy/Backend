@@ -63,15 +63,58 @@ public class Tasks {
     вторая — натуральное число, количество шагов, которое нужно пройти в данном направлении.
     Заключительное указание карты состоит только из одной строки, содержащей слово «стоп».
     Программа выводит минимальное количество указаний карты, которое нужно выполнить, чтобы прийти к кладу.
-    Гарантируется, что карта приводит к кладу.
-    Формат ввода
-    Два целых числа — координаты клада. Затем несколько блоков: строка (направление движения) и целое число
-    (количество шагов). Строка «стоп».
-    Формат вывода
-    Целое число — минимальное количество указаний карты, которое нужно
-    выполнить, чтобы прийти к кладу.*/
+    Гарантируется, что карта приводит к кладу.*/
     public void SearchTreasure() {
+        int x = 0;
+        int y = 0;
 
+        Scanner in = new Scanner(System.in);
+        System.out.print("Enter x coordinate: ");
+        int target_x = in.nextInt();
+
+        System.out.print("Enter y coordinate: ");
+        int target_y = in.nextInt();
+
+        int allSteps = 0;
+
+        while(true) {
+            System.out.print("Enter direction: ");
+            String direction = in.next();
+
+            if(direction.equals("стоп"))
+                break;
+
+            allSteps++;
+
+            System.out.print("Enter amount steps: ");
+            int steps = in.nextInt();
+
+            switch(direction) {
+                case "север":
+                    y += steps;
+                    break;
+                case "запад":
+                    x -= steps;
+                    break;
+                case "восток":
+                    x += steps;
+                    break;
+                case "юг":
+                    y -= steps;
+                    break;
+                default:
+                    System.out.print("invalid direction (you can use only: север, юг, восток, запад и стоп)");
+                    break;
+            }
+        }
+
+        if(x == target_x && y == target_y)
+            System.out.println("Congratulation! You find the treasure!");
+        else
+            System.out.println("You didn't find the treasure! The map was wrong!");
+
+        System.out.println("All steps: " + allSteps);
+        in.close();
     }
 
     /*Логистический максимин
@@ -107,6 +150,7 @@ public class Tasks {
         }
 
         System.out.println("Road - " + needRoad + "; Height - " + minHeight);
+        in.close();
     }
 
     /*Дважды четное число

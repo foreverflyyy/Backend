@@ -9,10 +9,10 @@ public class Main {
         //tasks.AlternatingSumSeries();
 
         /*Third task*/
-        //tasks.SearchTreasure();
+        tasks.SearchTreasure();
 
         /*Fourth task*/
-        tasks.FindMaxHeightCarInRoad();
+        //tasks.FindMaxHeightCarInRoad();
 
         /*Fifth task*/
         //tasks.isDoubleNumberParity();
