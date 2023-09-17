@@ -28,7 +28,7 @@ class AuthController {
       const hashPassword = bcrypt.hashSync(password, 7)
       const userRole = await Role.findOne({value: "USER"})
       const user = new User({username, password: hashPassword, role: [userRole.value]})
-      await user,save()
+      await user.save()
       return res.status(201).json({message: "Congratulation you followed!"})
    } catch(e){
       console.log(e)
