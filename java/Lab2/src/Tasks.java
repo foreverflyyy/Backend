@@ -72,8 +72,19 @@ public class Tasks {
 
     /*4. Напишите метод, который принимает двумерный массив и возвращает новый массив,
     полученный путем поворота исходного массива на 90 градусов по часовой стрелке*/
-    public void RotateArray(int number, int amountSteps) {
+    public int[][] RotateArray(int[][] matrix) {
+        if (matrix == null || matrix.length == 0 || matrix[0].length == 0)
+            return null;
 
+        int rows = matrix.length;
+        int cols = matrix[0].length;
+        int[][] rotatedMatrix = new int[cols][rows];
+
+        for (int i = 0; i < rows; i++)
+            for (int j = 0; j < cols; j++)
+                rotatedMatrix[j][rows - 1 - i] = matrix[i][j];
+
+        return rotatedMatrix;
     }
 
     /* 5. Напишите метод, который принимает массив целых чисел и целое число target и
@@ -131,7 +142,19 @@ public class Tasks {
 
     /*8. Напишите метод, который принимает двумерный массив и возвращает новый массив,
     полученный путем поворота исходного массива на 90 градусов по часовой стрелке*/
-    public void RotateDoubleArray(int number, int amountSteps) {
+    public int[][] RotateDoubleArray(int[][] matrix) {
 
+        if (matrix == null || matrix.length == 0 || matrix[0].length == 0)
+            return null;
+
+        int rows = matrix.length;
+        int cols = matrix[0].length;
+        int[][] rotatedMatrix = new int[cols][rows];
+
+        for (int i = 0; i < rows; i++)
+            for (int j = 0; j < cols; j++)
+                rotatedMatrix[j][rows - 1 - i] = matrix[i][j];
+
+        return rotatedMatrix;
     }
 }

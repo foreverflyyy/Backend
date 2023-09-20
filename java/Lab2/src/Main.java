@@ -19,8 +19,21 @@ public class Main {
         System.out.println(sum);*/
 
 
-        /*Fourth task*/
-        //tasks.RotateArray();
+        /*Fourth task (Done)*/
+        /*int[][] matrix = {
+                {7, 8, 9},
+                {4, 5, 6},
+                {1, 2, 3}
+        };
+
+        int[][] rotatedMatrix = tasks.RotateArray(matrix);
+
+        for (int i = 0; i < rotatedMatrix.length; i++) {
+            for (int j = 0; j < rotatedMatrix[0].length; j++) {
+                System.out.print(rotatedMatrix[i][j] + " ");
+            }
+            System.out.println();
+        }*/
 
 
         /*Fifth task (Done)*/
@@ -42,7 +55,20 @@ public class Main {
         System.out.println(Arrays.toString(newArrWithMaxNumbers));*/
 
 
-        /*Eighth task*/
-        //tasks.RotateDoubleArray();
+        /*Eighth task (Done)*/
+        /*int[][] matrix = {
+                {1, 2, 3},
+                {4, 5, 6},
+                {7, 8, 9}
+        };
+
+        int[][] rotatedMatrix = tasks.RotateDoubleArray(matrix);
+
+        for (int i = 0; i < rotatedMatrix.length; i++) {
+            for (int j = 0; j < rotatedMatrix[0].length; j++) {
+                System.out.print(rotatedMatrix[i][j] + " ");
+            }
+            System.out.println();
+        }*/
     }
 }
