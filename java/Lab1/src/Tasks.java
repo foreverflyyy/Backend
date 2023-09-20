@@ -76,15 +76,19 @@ public class Tasks {
         int target_y = in.nextInt();
 
         int allSteps = 0;
+        int stepsToTarget = 0;
 
         while(true) {
             System.out.print("Enter direction: ");
             String direction = in.next();
 
+            allSteps++;
+
+            if(x == target_x && y == target_y && stepsToTarget == 0)
+                stepsToTarget = allSteps;
+
             if(direction.equals("стоп"))
                 break;
-
-            allSteps++;
 
             System.out.print("Enter amount steps: ");
             int steps = in.nextInt();
@@ -113,7 +117,7 @@ public class Tasks {
         else
             System.out.println("You didn't find the treasure! The map was wrong!");
 
-        System.out.println("All steps: " + allSteps);
+        System.out.println("All steps: " + stepsToTarget);
         in.close();
     }
 
@@ -176,7 +180,7 @@ public class Tasks {
             number = number / 10;
         }
 
-        if(sum == mul)
+        if(sum % 2 == 0 && mul % 2 == 0)
             System.out.println("This is Double Number Parity");
         else
             System.out.println("This is not Double Number Parity");
