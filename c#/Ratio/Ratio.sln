@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34003.232
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ratio", "Ratio\Ratio.csproj", "{9F4CDE3B-C862-4488-9F04-45467AC7BAED}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9F4CDE3B-C862-4488-9F04-45467AC7BAED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F4CDE3B-C862-4488-9F04-45467AC7BAED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F4CDE3B-C862-4488-9F04-45467AC7BAED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F4CDE3B-C862-4488-9F04-45467AC7BAED}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B6262E82-B32E-4D8A-9FC0-52AF704151D5}
+	EndGlobalSection
+EndGlobal
