@@ -53,9 +53,7 @@
         public static RatioCalc operator /(RatioCalc frac1, RatioCalc frac2)
         {
             if (frac2.numerator == 0)
-            {
                 throw new DivideByZeroException("Деление на ноль.");
-            }
 
             int newNumerator = frac1.numerator * frac2.denominator;
             int newDenominator = frac1.denominator * frac2.numerator;
