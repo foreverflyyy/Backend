@@ -12,7 +12,5 @@ public class BaseClass {
             mRootUser = newRootUser;
         else
             throw new Exception("Wrong user root!");
-
-        System.out.println("Successfully change root User!");
     }
 }

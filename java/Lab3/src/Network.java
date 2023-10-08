@@ -9,9 +9,14 @@ public class Network extends BaseClass {
         super(rootUser);
     }
 
-    public Cinema ChooseNeedCinema() throws Exception {
+    public Cinema ChooseCinema() throws Exception {
+        if(mCinemas.isEmpty()) {
+            System.out.println("The are not cinemas");
+            System.out.println();
+            return null;
+        }
+
         System.out.println("List of cinemas:");
-        System.out.println();
 
         for (int i = 0; i < mCinemas.size(); i++)
             System.out.println((i + 1) + ") " + mCinemas.get(i).GetCinemaName());
@@ -23,7 +28,7 @@ public class Network extends BaseClass {
         Scanner in = new Scanner(System.in);
         int indexOfCinema = in.nextInt() - 1;
 
-        if(indexOfCinema < 1 || indexOfCinema > (mCinemas.size() - 1))
+        if(indexOfCinema < 0 || indexOfCinema > (mCinemas.size() - 1))
             throw new Exception("Wrong number!");
 
         return mCinemas.get(indexOfCinema);
@@ -36,13 +41,13 @@ public class Network extends BaseClass {
         }
 
         System.out.println();
-        System.out.println("Enter name of the cinema hall:");
+        System.out.println("Enter name of the cinema:");
 
         Scanner in = new Scanner(System.in);
         String nameCinema = in.next();
 
         if(nameCinema.isEmpty()) {
-            System.out.println("Wrong specified the name of cinema hall.");
+            System.out.println("Wrong specified the name of cinema.");
             return;
         }
 

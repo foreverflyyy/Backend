@@ -1,19 +1,19 @@
 import enums.RootUser;
-
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Scanner;
 
 public class Film extends BaseClass {
 
     private String mNameFilm;
-    private Date mDateFilm;
+    private LocalDate mDateFilm;
     private Integer mDurationFilm;
     private Integer mCountFreePlaces;
 
     Film(
             RootUser rootUser,
             String nameFilm,
-            Date dateFilm,
+            LocalDate dateFilm,
             Integer durationFilm,
             Integer countChairsInHall
     ) throws Exception {
@@ -27,7 +27,7 @@ public class Film extends BaseClass {
 
     public String GetNameFilm() { return mNameFilm; }
 
-    public Date GetDateFilm() { return mDateFilm; }
+    public LocalDate GetDateFilm() { return mDateFilm; }
 
     public Integer GetDurationFilm() { return mDurationFilm; }
 

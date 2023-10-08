@@ -16,9 +16,13 @@ public class Cinema extends BaseClass {
         return mCinemaName;
     }
 
-    public CinemaHall ChooseNeedCinemaHall() throws Exception {
+    public CinemaHall ChooseCinemaHall() throws Exception {
+        if(mCinemaHalls.isEmpty()) {
+            System.out.println("The are not cinema halls");
+            return null;
+        }
+
         System.out.println("List of cinema halls:");
-        System.out.println();
 
         for (int i = 0; i < mCinemaHalls.size(); i++)
             System.out.println((i + 1) + ") " + mCinemaHalls.get(i).GetNameOfHall());
@@ -30,7 +34,7 @@ public class Cinema extends BaseClass {
         Scanner in = new Scanner(System.in);
         int indexOfCinemaHall = in.nextInt() - 1;
 
-        if(indexOfCinemaHall < 1 || indexOfCinemaHall > (mCinemaHalls.size() - 1))
+        if(indexOfCinemaHall < 0 || indexOfCinemaHall > (mCinemaHalls.size() - 1))
             throw new Exception("Wrong number!");
 
         return mCinemaHalls.get(indexOfCinemaHall);

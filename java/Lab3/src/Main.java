@@ -28,8 +28,8 @@ public class Main {
     public static boolean ListWithActions() throws Exception {
         Scanner in = new Scanner(System.in);
 
-        System.out.println("You are logged in as an - " + CurrentRootUser);
         System.out.println();
+        System.out.println("You are logged in as an - " + CurrentRootUser);
         System.out.println("Which the next action?");
 
         switch(CurrentAction) {
@@ -40,11 +40,16 @@ public class Main {
                 System.out.println("4) Exit.");
 
                 System.out.println();
-                System.out.println("Select the desired action (1 or 2):");
+                System.out.println("Select the desired action (1, 2, 3 or 4):");
                 int numForAction = in.nextInt();
 
                 if(numForAction == 1) {
-                    CurrentCinema = CurrentNetwork.ChooseNeedCinema();
+                    Cinema chosenCinema = CurrentNetwork.ChooseCinema();
+
+                    if(chosenCinema == null)
+                        break;
+
+                    CurrentCinema = chosenCinema;
                     CurrentAction = ConsoleAction.CINEMA;
                 }
                 else if(numForAction == 2)
@@ -68,11 +73,16 @@ public class Main {
                 System.out.println("3) Back.");
 
                 System.out.println();
-                System.out.println("Select the desired action (1, 2 or 3s):");
+                System.out.println("Select the desired action (1, 2 or 3):");
                 int numForAction = in.nextInt();
 
                 if(numForAction == 1) {
-                    CurrentCinemaHall = CurrentCinema.ChooseNeedCinemaHall();
+                    CinemaHall chosenCinemaHall = CurrentCinema.ChooseCinemaHall();
+
+                    if(chosenCinemaHall == null)
+                        break;
+
+                    CurrentCinemaHall = chosenCinemaHall;
                     CurrentAction = ConsoleAction.CINEMA_HALL;
                 }else if(numForAction == 2)
                     CurrentCinema.AddNewCinemaHall();
@@ -93,7 +103,12 @@ public class Main {
                 int numForAction = in.nextInt();
 
                 if(numForAction == 1) {
-                    CurrentFilm = CurrentCinemaHall.ChooseNeedFilm();
+                    Film chosenFilm = CurrentCinemaHall.ChooseFilm();
+
+                    if(chosenFilm == null)
+                        break;
+
+                    CurrentFilm = chosenFilm;
                     CurrentAction = ConsoleAction.FILM;
                 }else if(numForAction == 2)
                     CurrentCinemaHall.AddNewCinemaFilm();
@@ -110,7 +125,7 @@ public class Main {
                 System.out.println("3) Back.");
 
                 System.out.println();
-                System.out.println("Select the desired action (1 or 2):");
+                System.out.println("Select the desired action (1, 2 or 3):");
                 int numForAction = in.nextInt();
 
                 if(numForAction == 1)
