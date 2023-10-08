@@ -1,3 +1,4 @@
+import enums.RootUser;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -21,15 +22,30 @@ public class CinemaHall extends BaseClass{
         return mNameOfHall;
     }
 
-    public Integer GetCountChairsInHall() { return mCountChairs; }
+    public Film ChooseNeedFilm() throws Exception {
+        System.out.println("List of films:");
+        System.out.println();
 
-    public LinkedList<Film> GetFilmsInHall() {
-        return mCinemaFilms;
+        for (int i = 0; i < mCinemaFilms.size(); i++)
+            System.out.println((i + 1) + ") " + mCinemaFilms.get(i).GetNameFilm());
+
+        /*for (Cinema mCinema : mCinemas)
+            System.out.println("Cinema: " + mCinema.GetCinemaName());*/
+
+        System.out.print("Choose the film number you need:");
+        Scanner in = new Scanner(System.in);
+        int indexOfFilm = in.nextInt() - 1;
+
+        if(indexOfFilm < 1 || indexOfFilm > (mCinemaFilms.size() - 1))
+            throw new Exception("Wrong number!");
+
+        return mCinemaFilms.get(indexOfFilm);
     }
 
     public void AddNewCinemaFilm() throws Exception {
         if(mRootUser == RootUser.USER){
             System.out.println("Refuse in access!");
+            return;
         }
 
         System.out.println();
@@ -70,7 +86,8 @@ public class CinemaHall extends BaseClass{
                 mRootUser,
                 nameFilm,
                 dateFilm,
-                durationFilm
+                durationFilm,
+                mCountChairs
         );
 
         mCinemaFilms.add(cinemaFilm);

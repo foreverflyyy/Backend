@@ -1,3 +1,5 @@
+import enums.RootUser;
+
 public class BaseClass {
     protected RootUser mRootUser;
 
