@@ -14,6 +14,19 @@ public class Main {
         board.init();
 
         while (true) {
+            boolean currentKingStatus = board.checkKingStatus();
+            if(!currentKingStatus){
+                System.out.println("Игра завершена.");
+
+                if(board.getColorGaming() == 'w')
+                    System.out.println("Победа белых.");
+                else
+                    System.out.println("Победа черных.");
+
+                in.close();
+                break;
+            }
+
             board.print_board();
             System.out.println();
             System.out.println("Команды: ");

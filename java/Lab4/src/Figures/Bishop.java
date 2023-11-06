@@ -26,12 +26,10 @@ public class Bishop extends Figure{
                     return false;
             }
         }else if(rowIndex < row1 && columnIndex > col1) {
-            System.out.println("Ошибкаdddddd!");
             while((columnIndex - 1) != col1 || (rowIndex + 1) != row1) {
                 columnIndex -= 1;
                 rowIndex += 1;
 
-                System.out.println("columnIndex: " + columnIndex + "; rowIndex: " + rowIndex);
                 boolean wrongField = (columnIndex == col1 && rowIndex != row1) || (columnIndex != col1 && rowIndex == row1);
                 if(wrongField || fields[rowIndex][columnIndex] != null) {
                     return false;
@@ -52,7 +50,6 @@ public class Bishop extends Figure{
                 rowIndex -= 1;
 
                 boolean wrongField = (columnIndex == col1 && rowIndex != row1) || (columnIndex != col1 && rowIndex == row1);
-                System.out.println("columnIndex: " + columnIndex + "; rowIndex: " + rowIndex);
                 if(wrongField || fields[rowIndex][columnIndex] != null)
                     return false;
             }

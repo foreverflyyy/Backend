@@ -69,7 +69,13 @@ public class Board {
     }
 
     public boolean move_figure(int row1, int col1, int row2, int col2 ){
+        if(!((row1 >=0 && row1 < 8 ) && (col1 >=0 && col1 < 8) && (row2 >=0 && row2 < 8) && (col2 >=0 && col2 < 8)))
+            return false;
+
         Figure figure =  this.fields[row1][col1];
+        if(figure == null)
+            return false;
+
         if(this.colorGaming != figure.getColor())
             return false;
 
@@ -110,5 +116,53 @@ public class Board {
 
         for(int col = 0; col < 8; col++)
             System.out.print("    " + col);
+    }
+
+    public boolean checkKingStatus() {
+        char currentColor = this.getColorGaming();
+        Figure currentKing = null;
+        int positionKingX = 0;
+        int positionKingY = 0;
+
+        for(int i = 0; i < 8; i++) {
+            for(int j = 0; j < 8; j++) {
+                if(this.fields[i][j] == null)
+                    continue;
+
+                Figure king = this.fields[i][j];
+                if(!king.getClass().getName().equals("Figures.King") || king.getColor() != currentColor)
+                    continue;
+
+                currentKing = king;
+                positionKingX = j;
+                positionKingY = i;
+                break;
+            }
+        }
+
+        for(int i = 0; i < 8; i++) {
+            for(int j = 0; j < 8; j++) {
+                Figure figure = this.fields[i][j];
+                if(figure == null || figure.getColor() == currentColor)
+                    continue;
+
+                if(figure.canAttack(this.fields, i, j, positionKingY, positionKingX)){
+                    boolean conditions = this.move_figure(positionKingY, positionKingX, positionKingY + 1, positionKingX + 1) ||
+                            this.move_figure(positionKingY, positionKingX, positionKingY - 1, positionKingX - 1) ||
+                            this.move_figure(positionKingY, positionKingX, positionKingY - 1, positionKingX + 1) ||
+                            this.move_figure(positionKingY, positionKingX, positionKingY + 1, positionKingX - 1);
+
+                    if(!conditions) {
+                        System.out.println("Шах и мат дружище!");
+                        return false;
+                    }
+
+                    System.out.println("Вам шах!");
+                    return true;
+                }
+            }
+        }
+
+        return true;
     }
 }
