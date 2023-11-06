@@ -48,16 +48,12 @@ public class Main {
             }
 
             if(board.move_figure(y1, x1, y2, x2))
-                ChangeMotionSide();
+                switch (board.getColorGaming()) {
+                    case 'w' -> board.setColorGaming('b');
+                    case 'b' -> board.setColorGaming('w');
+                }
             else
                 System.out.println("Ошибка хода, повторите ввод хода!");
-        }
-    }
-
-    public static void ChangeMotionSide() {
-        switch (board.getColorGaming()) {
-            case 'w' -> board.setColorGaming('b');
-            case 'b' -> board.setColorGaming('w');
         }
     }
 }

@@ -10,47 +10,55 @@ public class Bishop extends Figure{
         if (!super.canMove(fields, row, col, row1, col1))
             return false;
 
-        boolean firstCondition = (row == row1) && (col != col1);
-        boolean firstSubCondition = true;
-        if (firstCondition) {
-            if (col > col1) {
-                for (int i = col; i > col1; i--)
-                    if (fields[row][i] != null) {
-                        firstSubCondition = false;
-                        break;
-                    }
+        if(row == row1 || col == col1)
+            return false;
+
+        int columnIndex = col;
+        int rowIndex = row;
+
+        if(rowIndex < row1 && columnIndex < col1) {
+            while((columnIndex + 1) != col1 || (rowIndex + 1) != row1) {
+                columnIndex += 1;
+                rowIndex += 1;
+
+                boolean wrongField = (columnIndex == col1 && rowIndex != row1) || (columnIndex != col1 && rowIndex == row1);
+                if(wrongField || fields[rowIndex][columnIndex] != null)
+                    return false;
             }
-            if (col < col1) {
-                for (int i = col; i < col1; i++)
-                    if (fields[row][i] != null) {
-                        firstSubCondition = false;
-                        break;
-                    }
+        }else if(rowIndex < row1 && columnIndex > col1) {
+            System.out.println("Ошибкаdddddd!");
+            while((columnIndex - 1) != col1 || (rowIndex + 1) != row1) {
+                columnIndex -= 1;
+                rowIndex += 1;
+
+                System.out.println("columnIndex: " + columnIndex + "; rowIndex: " + rowIndex);
+                boolean wrongField = (columnIndex == col1 && rowIndex != row1) || (columnIndex != col1 && rowIndex == row1);
+                if(wrongField || fields[rowIndex][columnIndex] != null) {
+                    return false;
+                }
+            }
+        }else if(rowIndex > row1 && columnIndex > col1) {
+            while((columnIndex - 1) != col1 || (rowIndex - 1) != row1) {
+                columnIndex -= 1;
+                rowIndex -= 1;
+
+                boolean wrongField = (columnIndex == col1 && rowIndex != row1) || (columnIndex != col1 && rowIndex == row1);
+                if(wrongField || fields[rowIndex][columnIndex] != null)
+                    return false;
+            }
+        }else if(rowIndex > row1 && columnIndex < col1) {
+            while((columnIndex + 1) != col1 || (rowIndex - 1) != row1) {
+                columnIndex += 1;
+                rowIndex -= 1;
+
+                boolean wrongField = (columnIndex == col1 && rowIndex != row1) || (columnIndex != col1 && rowIndex == row1);
+                System.out.println("columnIndex: " + columnIndex + "; rowIndex: " + rowIndex);
+                if(wrongField || fields[rowIndex][columnIndex] != null)
+                    return false;
             }
         }
-        if (firstCondition && firstSubCondition) return true;
 
-
-        boolean secondCondition = (row != row1) && (col == col1);
-        boolean secondSubCondition = true;
-        if (secondCondition) {
-            if (row > row1) {
-                for (int i = row; i > row1; i--)
-                    if (fields[i][col] != null) {
-                        secondSubCondition = false;
-                        break;
-                    }
-            }
-            if (row < row1) {
-                for (int i = row; i < row1; i++)
-                    if (fields[i][col] != null) {
-                        secondSubCondition = false;
-                        break;
-                    }
-            }
-        }
-
-        return secondCondition && secondSubCondition;
+        return true;
     }
 
     @Override

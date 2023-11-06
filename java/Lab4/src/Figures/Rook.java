@@ -13,15 +13,15 @@ public class Rook extends Figure{
         boolean firstCondition = (row == row1) && (col != col1);
         boolean firstSubCondition = true;
         if (firstCondition) {
-            if (col > col1) {
-                for (int i = col; i > col1; i--)
+            if (col > col1 && (col + 1) != 8) {
+                for (int i = col - 1; i > col1; i--)
                     if (fields[row][i] != null) {
                         firstSubCondition = false;
                         break;
                     }
             }
-            if (col < col1) {
-                for (int i = col; i < col1; i++)
+            if (col < col1 && (col + 1) != 8) {
+                for (int i = col + 1; i < col1; i++)
                     if (fields[row][i] != null) {
                         firstSubCondition = false;
                         break;
@@ -30,20 +30,21 @@ public class Rook extends Figure{
         }
         if (firstCondition && firstSubCondition) return true;
 
-
         boolean secondCondition = (row != row1) && (col == col1);
         boolean secondSubCondition = true;
         if (secondCondition) {
-            if (row > row1) {
-                for (int i = row; i > row1; i--)
+            if (row > row1 && (row + 1) != 8) {
+                for (int i = row - 1; i > row1; i--)
                     if (fields[i][col] != null) {
+                        System.out.println("1] i - " + i);
                         secondSubCondition = false;
                         break;
                     }
             }
-            if (row < row1) {
-                for (int i = row; i < row1; i++)
+            if (row < row1 && (row + 1) != 8) {
+                for (int i = row + 1; i < row1; i++)
                     if (fields[i][col] != null) {
+                        System.out.println("2] i - " + i);
                         secondSubCondition = false;
                         break;
                     }
