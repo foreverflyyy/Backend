@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "rootDir": "./",
+    "target": "es6",
+    "outDir": "./dist",
+    "module": "commonjs",
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true
+  }
+}
