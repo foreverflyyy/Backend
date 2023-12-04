@@ -6,6 +6,7 @@
     "outDir": "./dist",
     "module": "commonjs",
     "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+    "allowSyntheticDefaultImports": true
   }
 }
