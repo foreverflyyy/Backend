@@ -177,13 +177,13 @@ class Array3d {
 // console.log(arrOnes.getValues12(1, 2));
 
 
-const arrFill = Array3d.fill(2, 3, 4, 5);
-console.log(arrFill.getValues0(1));
-console.log(arrFill.getValues1(2));
-console.log(arrFill.getValues2(3));
-console.log(arrFill.getValues01(1, 2));
-console.log(arrFill.getValues02(1, 3));
-console.log(arrFill.getValues12(2, 3));
+// const arrFill = Array3d.fill(2, 3, 4, 5);
+// console.log(arrFill.getValues0(1));
+// console.log(arrFill.getValues1(2));
+// console.log(arrFill.getValues2(3));
+// console.log(arrFill.getValues01(1, 2));
+// console.log(arrFill.getValues02(1, 3));
+// console.log(arrFill.getValues12(2, 3));
 
 const arr = new Array3d(3, 4, 5);
 const values = [[1, 2, 3, 4, 5], [6, 7, 8, 9, 10], [11, 12, 13, 14, 15], [16, 17, 18, 19, 20]];

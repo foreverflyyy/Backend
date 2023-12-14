@@ -1,7 +1,6 @@
 import {WindowsControlFactory} from "./windows/Factory";
 
 /* Задание. Порождающие паттерны.
-
 Создать симуляцию крокссплатформенного приложения при
 паттерна «абстрактная фабрика». Фабрика должна генерировать набор.
 контроллов для различных операционных систем (Windows, Linux, MacOS).
@@ -33,5 +32,5 @@ windowsForm.addControl(windowsFactory.createLabel());
 
 const windowsTextBox = windowsFactory.createTextBox();
 windowsTextBox.setPosition(20, 20);
-windowsTextBox.setText("Введенный текст");
+windowsTextBox.setText("Введенный текст:");
 windowsTextBox.onValueChanged();
