@@ -23,14 +23,14 @@ class Authenticator {
         }
     }
 
-    async register (login: string, password: string) {
+    register (login: string, password: string) {
         const existingUser = this.users.find((user) => user.login === login);
         if (existingUser) {
             console.log('Пользователь с таким логином уже существует.');
         } else {
             const newUser = new User(login, password);
             this.users.push(newUser);
-            await WorkWithFile.writeToFile(this.csvFilePath, `\n${login},${password}`);
+            WorkWithFile.writeToFile(this.csvFilePath, `\n${login},${password}`);
             console.log('Регистрация пользователя успешна.');
         }
     }

@@ -20,7 +20,7 @@ export class WorkWithFile {
         }
     }
 
-    public static writeToFile = async (pathToFile: string, data: string) => {
+    public static writeToFile = (pathToFile: string, data: string) => {
         appendFile(pathToFile, data, 'utf8', function (err: any) {
             if (err)
                 console.log("Ошибка.");

@@ -1,22 +1,4 @@
-/*
-    Класс Array3d должен представлять трехмерный массив, но по факту хранит данные в одномерном массиве.
-    Список методов:
-    Инициализация экземпляра с размерами (dim0, dim1, dim2)
-    Индексатор для доступа к элементам массива по трехмерным координатам (i, j, k)
-    Метод GetValues0(int i): отдаёт срез массива по первой координате (i, .., ..).
-    Метод GetValues1(int j): отдаёт срез массива по второй координате (.., j, ..).
-    Метод GetValues2(int k): отдаёт срез массива по третьей координате (.., .., k).
-    Метод GetValues01(int i, int j): отдаёт срез массива по первой и второй координатам (i, j, ..)
-    Метод GetValues02(int i, int k): отдаёт срез массива по первой и третьей координатам (i, .., k)
-    Метод GetValues12(int j, int k): отдаёт срез массива по второй и третьей координатам (.., j, k)
-    Метод SetValues0(int i, [][]): задаёт значения в массиве для заданной первой координаты
-    Метод SetValues1(int j, [][]): задаёт значения в массиве для заданной второй координаты
-    Метод SetValues2(int k, [][]): задаёт значения в массиве для заданной третьей координаты
-    Метод SetValues01(int i, int j, [][]): задаёт значения в массиве для заданных первой и второй координат
-    Метод SetValues02(int i, int k, [][]): задаёт значения в массиве для заданных первой и третьей координат
-    Метод SetValues12(int j, int k, [][]): задаёт значения в массиве для заданных второй и третьей координат
-    Методы для создания массива с одинаковыми элементами: ones, zeros,fill
-*/
+/* Класс Array3d должен представлять трехмерный массив, но по факту хранит данные в одномерном массиве. */
 
 class Array3d {
     private readonly dim0: number;
@@ -24,13 +6,15 @@ class Array3d {
     private readonly dim2: number;
     private readonly data: number[];
 
+    // Инициализация экземпляра с размерами (dim0, dim1, dim2)
     constructor(dim0: number, dim1: number, dim2: number) {
         this.dim0 = dim0;
         this.dim1 = dim1;
         this.dim2 = dim2;
-        this.data = new Array(dim0 * dim1 * dim2).fill(null);
+        this.data = new Array(dim0 * dim1 * dim2).fill(0);
     }
 
+    // Индексатор для доступа к элементам массива по трехмерным координатам (i, j, k)
     private getIndex(i: number, j: number, k: number): number {
         return i * this.dim1 * this.dim2 + j * this.dim2 + k;
     }
@@ -45,6 +29,7 @@ class Array3d {
         this.data[index] = value;
     }
 
+    // Метод GetValues0(int i): отдаёт срез массива по первой координате (i, .., ..).
     getValues0(i: number): number[] {
         const slice: number[] = [];
         for (let j = 0; j < this.dim1; j++) {
@@ -55,6 +40,7 @@ class Array3d {
         return slice;
     }
 
+    // Метод GetValues1(int j): отдаёт срез массива по второй координате (.., j, ..).
     getValues1(j: number): number[] {
         const slice: number[] = [];
         for (let i = 0; i < this.dim0; i++) {
@@ -65,6 +51,7 @@ class Array3d {
         return slice;
     }
 
+    // Метод GetValues2(int k): отдаёт срез массива по третьей координате (.., .., k).
     getValues2(k: number): number[] {
         const slice: number[] = [];
         for (let i = 0; i < this.dim0; i++) {
@@ -75,6 +62,7 @@ class Array3d {
         return slice;
     }
 
+    // Метод GetValues01(int i, int j): отдаёт срез массива по первой и второй координатам (i, j, ..)
     getValues01(i: number, j: number): number[] {
         const slice: number[] = [];
         for (let k = 0; k < this.dim2; k++) {
@@ -83,6 +71,7 @@ class Array3d {
         return slice;
     }
 
+    // Метод GetValues02(int i, int k): отдаёт срез массива по первой и третьей координатам (i, .., k)
     getValues02(i: number, k: number): number[] {
         const slice: number[] = [];
         for (let j = 0; j < this.dim1; j++) {
@@ -91,6 +80,7 @@ class Array3d {
         return slice;
     }
 
+    // Метод GetValues12(int j, int k): отдаёт срез массива по второй и третьей координатам (.., j, k)
     getValues12(j: number, k: number): number[] {
         const slice: number[] = [];
         for (let i = 0; i < this.dim0; i++) {
@@ -99,6 +89,7 @@ class Array3d {
         return slice;
     }
 
+    // Метод SetValues0(int i, [][]): задаёт значения в массиве для заданной первой координаты
     setValues0(i: number, values: number[][]): void {
         for (let j = 0; j < this.dim1; j++) {
             for (let k = 0; k < this.dim2; k++) {
@@ -107,6 +98,7 @@ class Array3d {
         }
     }
 
+    // Метод SetValues1(int j, [][]): задаёт значения в массиве для заданной второй координаты
     setValues1(j: number, values: number[][]): void {
         for (let i = 0; i < this.dim0; i++) {
             for (let k = 0; k < this.dim2; k++) {
@@ -115,6 +107,7 @@ class Array3d {
         }
     }
 
+    // Метод SetValues2(int k, [][]): задаёт значения в массиве для заданной третьей координаты
     setValues2(k: number, values: number[][]): void {
         for (let i = 0; i < this.dim0; i++) {
             for (let j = 0; j < this.dim1; j++) {
@@ -123,24 +116,28 @@ class Array3d {
         }
     }
 
+    // Метод SetValues01(int i, int j, [][]): задаёт значения в массиве для заданных первой и второй координат
     setValues01(i: number, j: number, values: number[]): void {
         for (let k = 0; k < this.dim2; k++) {
             this.setValue(i, j, k, values[k]);
         }
     }
 
+    // Метод SetValues02(int i, int k, [][]): задаёт значения в массиве для заданных первой и третьей координат
     setValues02(i: number, k: number, values: number[]): void {
         for (let j = 0; j < this.dim1; j++) {
             this.setValue(i, j, k, values[j]);
         }
     }
 
+    // Метод SetValues12(int j, int k, [][]): задаёт значения в массиве для заданных второй и третьей координат
     setValues12(j: number, k: number, values: number[]): void {
         for (let i = 0; i < this.dim0; i++) {
             this.setValue(i, j, k, values[i]);
         }
     }
 
+    // Методы для создания массива с одинаковыми элементами: ones, zeros,fill
     static ones(dim0: number, dim1: number, dim2: number): Array3d {
         const array3d = new Array3d(dim0, dim1, dim2);
         for (let i = 0; i < dim0; i++) {
@@ -171,21 +168,14 @@ class Array3d {
 }
 
 // Пример использования
-const arrOnes = Array3d.ones(3, 3, 3);
-console.log(arrOnes.getValues0(0));
-console.log(arrOnes.getValues1(1));
-console.log(arrOnes.getValues2(2));
-console.log(arrOnes.getValues01(0, 1));
-console.log(arrOnes.getValues02(0, 2));
-console.log(arrOnes.getValues12(1, 2));
+// const arrOnes = Array3d.ones(3, 3, 3);
+// console.log(arrOnes.getValues0(0));
+// console.log(arrOnes.getValues1(1));
+// console.log(arrOnes.getValues2(2));
+// console.log(arrOnes.getValues01(0, 1));
+// console.log(arrOnes.getValues02(0, 2));
+// console.log(arrOnes.getValues12(1, 2));
 
-const arrZeros = Array3d.zeros(2, 2, 2);
-console.log(arrZeros.getValues0(1));
-console.log(arrZeros.getValues1(0));
-console.log(arrZeros.getValues2(1));
-console.log(arrZeros.getValues01(1, 0));
-console.log(arrZeros.getValues02(1, 1));
-console.log(arrZeros.getValues12(0, 1));
 
 const arrFill = Array3d.fill(2, 3, 4, 5);
 console.log(arrFill.getValues0(1));

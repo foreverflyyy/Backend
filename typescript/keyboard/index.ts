@@ -21,9 +21,9 @@ class Keyboard extends EventEmitter {
 
     constructor() {
         super();
-        readline.emitKeypressEvents(process.stdin); // Позволяет использовать события клавиш в Node.js
-        process.stdin.setRawMode(true); // В этом режиме данные с клавиатуры передаются в программу непосредственно, без буферизации
-        process.stdin.on('keypress', (_, key) => this.handleKeyPress(key)); // Код устанавливает обработчик событий при каждом нажатии клавиши
+        readline.emitKeypressEvents(process.stdin);
+        process.stdin.setRawMode(true);
+        process.stdin.on('keypress', (_, key) => this.handleKeyPress(key));
     }
 
     addAction(key: string, action: () => void): void {
@@ -54,13 +54,8 @@ class Keyboard extends EventEmitter {
     }
 
     reassignKey(key: string, newAction: () => void): void {
-        const oldAction = this.actions[key];
-        if (oldAction !== undefined) {
-            delete this.actions[key];
-            this.actions[key] = newAction;
-        } else {
-            console.log(`Нет действия на ${key}`);
-        }
+        delete this.actions[key];
+        this.actions[key] = newAction;
     }
 
     private handleKeyPress(key: {sequence: string, name: string, ctrl: boolean, shift: boolean}): void {
@@ -86,7 +81,18 @@ class Keyboard extends EventEmitter {
             combinationKey += "+ctrl";
 
         this.pressedKeys.add(combinationKey);
-        this.pressKey(combinationKey)
+        const countPressedKey = this.pressedKeys.size;
+
+        setTimeout(() => {
+            if(countPressedKey === this.pressedKeys.size) {
+                let resultCombination = "";
+                for (const key of this.pressedKeys) {
+                    resultCombination += `${key}+`
+                }
+                this.pressKey(combinationKey.substring(0, resultCombination.length - 1));
+                this.pressedKeys.clear();
+            }
+        }, 500)
     }
 
     demonstrateWorkflow(keys: string[], delay: number): void {
