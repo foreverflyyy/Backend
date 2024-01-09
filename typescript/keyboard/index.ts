@@ -16,7 +16,7 @@ interface Actions {
 
 class Keyboard extends EventEmitter {
     public actions: Actions = {};
-    private workflow: string[] = [];
+    private actionsForCancel: any[] = [];
     private pressedKeys: Set<string> = new Set();
 
     constructor() {
@@ -28,32 +28,41 @@ class Keyboard extends EventEmitter {
 
     addAction(key: string, action: () => void): void {
         this.actions[key] = action;
+        this.actionsForCancel.push(() => delete this.actions[key]);
     }
 
     addCombinationAction(keys: string[], action: () => void): void {
         const combination = keys.join('+');
         this.actions[combination] = action;
+        this.actionsForCancel.push(() => delete this.actions[combination]);
     }
 
-    pressKey(key: string): void {
+    pressKey(key: string, isUndoAction = false): void {
+        if (!isUndoAction) {
+            this.actionsForCancel.push(() => {
+                this.pressKey(key, true)
+            });
+        }
+
         const action = this.actions[key];
         if (action) {
             action();
-            this.workflow.push(key);
         } else
             console.log(`На кнопку ${key} не назначено никаких действий!`);
     }
 
     undo(): void {
-        const lastKey = this.workflow.pop();
-        if (lastKey) {
-            const undoAction = this.actions[lastKey];
-            if (undoAction) undoAction();
+        const lastAction = this.actionsForCancel.pop();
+        if (lastAction) {
+            lastAction();
         } else
             console.log('Нечего возвращать');
     }
 
     reassignKey(key: string, newAction: () => void): void {
+        const oldAction = this.actions[key];
+        this.actionsForCancel.push(() => this.actions[key] = oldAction);
+
         delete this.actions[key];
         this.actions[key] = newAction;
     }
@@ -92,7 +101,7 @@ class Keyboard extends EventEmitter {
                 this.pressKey(combinationKey.substring(0, resultCombination.length - 1));
                 this.pressedKeys.clear();
             }
-        }, 500)
+        }, 300)
     }
 
     demonstrateWorkflow(keys: string[], delay: number): void {
@@ -100,24 +109,20 @@ class Keyboard extends EventEmitter {
             setTimeout(() => {
                 this.pressKey(key);
             }, delay);
-            delay += 300;
+            delay += 100;
         }
     }
 }
 
 const keyboard = new Keyboard();
+keyboard.addCombinationAction(['z', 'ctrl'], () => keyboard.undo());
 keyboard.addAction('a', () => console.log('Действие по кнопке a'));
 keyboard.addAction('b', () => console.log('Действие по кнопке b'));
 
 keyboard.addCombinationAction(['c', 'ctrl'], () => console.log('Действие по комбинации c + ctrl'));
-keyboard.addCombinationAction(['z', 'ctrl'], () => keyboard.undo());
-keyboard.demonstrateWorkflow(['a', 'b', 'c+ctrl'], 1000);
-
-setTimeout(() => {
-    keyboard.undo();
-}, 5000);
+keyboard.demonstrateWorkflow(['a', 'b', 'c+ctrl'], 500);
 
 setTimeout(() => {
     keyboard.reassignKey('a', () => console.log('Новое действие a'));
-    keyboard.demonstrateWorkflow(['a', 'b', 'c'], 1000);
-}, 7000);
+    keyboard.demonstrateWorkflow(['a', 'z+ctrl', 'z+ctrl', 'a', 'b', 'c'], 1000);
+}, 1000);
