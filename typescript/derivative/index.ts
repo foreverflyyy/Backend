@@ -5,6 +5,8 @@ abstract class BaseDerivative {
     protected derivative: number;
 
     protected constructor(x: number, h: number, func: (x: number) => any) {
+        if(h === 0)
+            throw new Error("Abstract method");
         this.x = x;
         this.h = h;
         this.func = func;
